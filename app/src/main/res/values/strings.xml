@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">meoWallPaper</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="main_bottom">首页</string>
+    <string name="discovery">发现</string>
+    <string name="categories">分类</string>
+    <string name="no_comment_tips">暂时没有评论，请稍后再来吧！</string>
+    <string name="pic_download">下载图片</string>
+    <string name="comment">评论</string>
+</resources>
