@@ -1,4 +1,4 @@
-package com.kai.meowallpaper.adapter
+package com.kai.meo.adapter
 
 import android.graphics.Bitmap
 import android.support.v7.widget.RecyclerView
@@ -12,14 +12,12 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.kai.meo.utils.options
 import com.kai.meowallpaper.R
-import com.kai.meowallpaper.bean.CategoryPicBean
-import com.kai.meowallpaper.utils.Common
-import com.kai.meowallpaper.utils.options
 import kotlinx.android.synthetic.main.category_pic_item.view.*
 
-class CategoryPicAdapter(val list: ArrayList<CategoryPicBean.Res.Vertical>, val onClick: (view: View, position: Int) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CategoryPicHolder(LayoutInflater.from(Common.context).inflate(R.layout.category_pic_item, parent, false))
+class CategoryPicAdapter(val list: ArrayList<com.kai.meo.bean.CategoryPicBean.Res.Vertical>, val onClick: (view: View, position: Int) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CategoryPicHolder(LayoutInflater.from(com.kai.meo.utils.Common.context).inflate(R.layout.category_pic_item, parent, false))
 
     override fun getItemCount() = list.size
 
@@ -27,7 +25,7 @@ class CategoryPicAdapter(val list: ArrayList<CategoryPicBean.Res.Vertical>, val 
         holder.itemView.iv_category_pic_item.setOnClickListener {
             onClick(holder.itemView, holder.adapterPosition)
         }
-        Glide.with(Common.context)
+        Glide.with(com.kai.meo.utils.Common.context)
                 .asBitmap()
                 .load(list[position].thumb)
                 .listener(object : RequestListener<Bitmap> {

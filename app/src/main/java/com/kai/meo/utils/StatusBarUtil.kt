@@ -1,4 +1,4 @@
-package com.kai.meowallpaper.utils
+package com.kai.meo.utils
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
@@ -46,6 +46,7 @@ object StatusBarUtil {
      * @param statusBarAlpha 状态栏透明度
      */
 
+    @SuppressLint("ObsoleteSdkInt")
     @JvmOverloads
     fun setColor(activity: Activity, @ColorInt color: Int, statusBarAlpha: Int = DEFAULT_ALPHA) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -87,6 +88,7 @@ object StatusBarUtil {
      * @param activity       需要设置的activity
      * @param statusBarAlpha 状态栏透明度
      */
+    @SuppressLint("ObsoleteSdkInt")
     @JvmOverloads
     fun setTranslucent(activity: Activity, statusBarAlpha: Int = DEFAULT_ALPHA) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
@@ -147,6 +149,7 @@ object StatusBarUtil {
      * @param color          状态栏颜色值
      * @param statusBarAlpha 状态栏透明度
      */
+    @SuppressLint("ObsoleteSdkInt")
     @JvmOverloads
     fun setColorForDrawerLayout(activity: Activity, drawerLayout: DrawerLayout, @ColorInt color: Int,
                                 statusBarAlpha: Int = DEFAULT_ALPHA) {
@@ -203,6 +206,7 @@ object StatusBarUtil {
      * @param activity     需要设置的activity
      * @param drawerLayout DrawerLayout
      */
+    @SuppressLint("ObsoleteSdkInt")
     @JvmOverloads
     fun setTranslucentForDrawerLayout(activity: Activity, drawerLayout: DrawerLayout, statusBarAlpha: Int = DEFAULT_ALPHA) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
@@ -212,7 +216,8 @@ object StatusBarUtil {
         addTranslucentView(activity, statusBarAlpha)
     }
 
-    /**
+    @SuppressLint("ObsoleteSdkInt")
+            /**
      * 为 DrawerLayout 布局设置状态栏透明
      *
      * @param activity     需要设置的activity
@@ -260,7 +265,8 @@ object StatusBarUtil {
         setTranslucentForImageView(activity, DEFAULT_ALPHA, needOffsetView)
     }
 
-    /**
+    @SuppressLint("ObsoleteSdkInt")
+            /**
      * 为头部是 ImageView 的界面设置状态栏透明
      *
      * @param activity       需要设置的activity
@@ -305,7 +311,8 @@ object StatusBarUtil {
         setTranslucentForImageViewInFragment(activity, 0, needOffsetView)
     }
 
-    /**
+    @SuppressLint("ObsoleteSdkInt")
+            /**
      * 为 fragment 头部是 ImageView 的设置状态栏透明
      *
      * @param activity       fragment 对应的 activity
@@ -406,6 +413,7 @@ object StatusBarUtil {
     /**
      * 设置透明
      */
+    @SuppressLint("ObsoleteSdkInt")
     private fun setTransparentForWindow(activity: Activity) {
         val window = activity.window
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -455,6 +463,7 @@ object StatusBarUtil {
         return result
     }
 
+    @SuppressLint("PrivateApi")
     @Throws(ClassNotFoundException::class, NoSuchFieldException::class, IllegalAccessException::class, InstantiationException::class)
     private fun obtainDimenResId(ctx: Context): Int {
         val resourceId = ctx.resources.getIdentifier("status_bar_height", "dimen", "android")

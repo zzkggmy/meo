@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".App"
+        android:name="com.kai.meo.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.kai.meo.activity.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,11 +23,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.CategoryPicActivity"
+            android:name="com.kai.meo.activity.CategoryPicActivity"
             android:label="分类下图片" />
         <activity
             android:theme="@style/AppTheme"
-            android:name=".activity.PicDetailsActivity"
+            android:name="com.kai.meo.activity.PicDetailsActivity"
             android:label="图片详情" />
     </application>
 

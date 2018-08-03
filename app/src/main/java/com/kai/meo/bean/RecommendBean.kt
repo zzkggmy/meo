@@ -1,4 +1,4 @@
-package com.kai.meowallpaper.bean
+package com.kai.meo.bean
 
 data class RecommendBean(var msg: String,
                          var res: Res,

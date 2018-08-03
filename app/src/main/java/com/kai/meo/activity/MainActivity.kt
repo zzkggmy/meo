@@ -1,20 +1,18 @@
-package com.kai.meowallpaper.activity
+package com.kai.meo.activity
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import com.kai.meo.utils.StatusBarUtil
+import com.kai.meo.utils.setToken
 import com.kai.meowallpaper.R
-import com.kai.meowallpaper.fragment.CategoriesFragment
-import com.kai.meowallpaper.fragment.MainFragment
-import com.kai.meowallpaper.utils.StatusBarUtil
-import com.kai.meowallpaper.utils.setToken
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private val list: ArrayList<Fragment> = ArrayList()
-    private val mainFragment = MainFragment()
-    private val categoriesFragment = CategoriesFragment()
+    private val mainFragment = com.kai.meo.fragment.MainFragment()
+    private val categoriesFragment = com.kai.meo.fragment.CategoriesFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

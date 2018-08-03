@@ -1,10 +1,9 @@
-package com.kai.meowallpaper.utils
+package com.kai.meo.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.kai.meowallpaper.App
 
-val sp: SharedPreferences by lazy { App.instance.applicationContext.getSharedPreferences("meo", Context.MODE_PRIVATE) }
+val sp: SharedPreferences by lazy { com.kai.meo.App.instance.applicationContext.getSharedPreferences("meo", Context.MODE_PRIVATE) }
 
 fun spSetString(key: kotlin.String,value: kotlin.String) = sp.edit().putString(key, value).apply()
 

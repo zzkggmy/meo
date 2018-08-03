@@ -1,4 +1,4 @@
-package com.kai.meowallpaper.utils
+package com.kai.meo.utils
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -54,7 +54,7 @@ private fun saveBitmap(bitmap: Bitmap) {
         fos.flush()
         fos.close()
         val uri: Uri = Uri.fromFile(file)
-        Common.context.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,uri))
+        com.kai.meo.utils.Common.context.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,uri))
 
     }catch (e: FileNotFoundException){}
 

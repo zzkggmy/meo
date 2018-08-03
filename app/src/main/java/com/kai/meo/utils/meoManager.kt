@@ -1,4 +1,4 @@
-package com.kai.meowallpaper.utils
+package com.kai.meo.utils
 
 fun setToken(token: String) {
     spSetString("token", token)

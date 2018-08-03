@@ -1,4 +1,4 @@
-package com.kai.meowallpaper.activity
+package com.kai.meo.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,14 +9,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
+import com.kai.meo.utils.SavePicManager
+import com.kai.meo.utils.StatusBarUtil
+import com.kai.meo.utils.options
 import com.kai.meowallpaper.R
-import com.kai.meowallpaper.adapter.CommentAdapter
-import com.kai.meowallpaper.bean.CommentBean
-import com.kai.meowallpaper.http.Api
-import com.kai.meowallpaper.utils.Common
-import com.kai.meowallpaper.utils.SavePicManager
-import com.kai.meowallpaper.utils.StatusBarUtil
-import com.kai.meowallpaper.utils.options
 import kotlinx.android.synthetic.main.activity_pic_details.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
@@ -24,7 +20,7 @@ import kotlinx.coroutines.experimental.async
 
 class PicDetailsActivity : AppCompatActivity() {
     private var imgUrl = ""
-    private val list: ArrayList<CommentBean.Res.Comment> = ArrayList()
+    private val list: ArrayList<com.kai.meo.bean.CommentBean.Res.Comment> = ArrayList()
     @SuppressLint("ObsoleteSdkInt")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +52,7 @@ class PicDetailsActivity : AppCompatActivity() {
         tv_comment.setOnClickListener { behavior.setState(BottomSheetBehavior.STATE_EXPANDED) }
 
 
-        Glide.with(Common.context)
+        Glide.with(com.kai.meo.utils.Common.context)
                 .asBitmap()
                 .load(imgUrl)
                 .apply(options)
@@ -72,7 +68,7 @@ class PicDetailsActivity : AppCompatActivity() {
     private fun getComment() {
 
         async(UI) {
-            val result = Api.retrofitService.getComment(intent.getStringExtra("id")).await()
+            val result = com.kai.meo.http.Api.retrofitService.getComment(intent.getStringExtra("id")).await()
 
             if (result.code == 0) {
                 Log.d("tag1", intent.getStringExtra("id") + result.res.toString())
@@ -84,7 +80,7 @@ class PicDetailsActivity : AppCompatActivity() {
                     ll_empty_comment.visibility = View.GONE
                     rv_comment_pic_details.visibility = View.VISIBLE
                 }
-                rv_comment_pic_details.adapter = CommentAdapter(list) { view, position ->
+                rv_comment_pic_details.adapter = com.kai.meo.adapter.CommentAdapter(list) { view, position ->
 
                 }
             }

@@ -1,7 +1,6 @@
-package com.kai.meowallpaper
+package com.kai.meo
 
 import android.app.Application
-import com.kai.meowallpaper.utils.Common
 
 class App : Application() {
     companion object {
@@ -10,6 +9,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        Common.with(this)
+        com.kai.meo.utils.Common.with(this)
     }
 }

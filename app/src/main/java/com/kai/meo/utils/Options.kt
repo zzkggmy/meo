@@ -1,4 +1,4 @@
-package com.kai.meowallpaper.utils
+package com.kai.meo.utils
 
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
