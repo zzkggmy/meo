@@ -4,16 +4,37 @@
     android:id="@+id/cl_pic_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/iv_pic_details"
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="30dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp" />
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/ic_back_white" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_marginEnd="15dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_more" />
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nsv_comment"
@@ -21,6 +42,7 @@
         android:layout_height="wrap_content"
         app:behavior_hideable="false"
         app:behavior_peekHeight="40dp"
+        app:layout_anchorGravity="top"
         app:layout_behavior="@string/bottom_sheet_behavior">
 
         <LinearLayout
@@ -28,40 +50,42 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:background="@color/zhihu_primary"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_marginStart="15dp"
+                    android:layout_alignParentStart="true"
+                    android:visibility="gone"
+                    android:id="@+id/tv_download_pic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:id="@+id/tv_download_pic"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
                     android:text="@string/pic_download"
                     android:textColor="@color/white" />
 
-                <TextView
-                    android:layout_gravity="center"
-                    android:gravity="center"
+                <ImageView
+                    android:src="@drawable/ic_comment"
+                    android:layout_marginEnd="15dp"
+                    android:layout_alignParentEnd="true"
                     android:id="@+id/tv_comment"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="@string/comment"
-                    android:textColor="@color/white" />
-            </LinearLayout>
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
+            </RelativeLayout>
 
             <android.support.v7.widget.CardView
+                android:background="@color/white"
+                android:id="@+id/cv_empty_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:visibility="gone"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="10dp">
 
@@ -75,23 +99,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
                         android:src="@drawable/ic_air_conditioner" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
                         android:gravity="center"
                         android:text="@string/no_comment_tips" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.RecyclerView
+            <com.kai.meo.view.EmptyRecyclerView
+                android:layout_marginTop="15dp"
+                android:background="@color/white"
                 android:id="@+id/rv_comment_pic_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusable="true"
-                android:focusableInTouchMode="true" />
+                android:visibility="gone" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

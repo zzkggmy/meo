@@ -29,23 +29,6 @@ class RecommendAdapter(val list: ArrayList<com.kai.meo.bean.RecommendBean.Res.Ve
         Glide.with(com.kai.meo.utils.Common.context)
                 .asBitmap()
                 .load(list[position].thumb)
-                .listener(object : RequestListener<Bitmap> {
-                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Bitmap>?, isFirstResource: Boolean): Boolean {
-                        return false
-                    }
-
-                    override fun onResourceReady(resource: Bitmap?, model: Any?, target: Target<Bitmap>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                        val width = resource!!.width
-                        val height = resource.height
-                        if (width > height) {
-                            holder.itemView.iv_main_frag_item.scaleType = ImageView.ScaleType.FIT_XY;
-                        } else if (width <= height) {
-                            holder.itemView.iv_main_frag_item.scaleType = ImageView.ScaleType.FIT_CENTER;
-                        }
-                        Log.d("tag", "" + width + "adsada" + height)
-                        return false
-                    }
-                })
                 .apply(options)
                 .into(holder.itemView.iv_main_frag_item)
         holder.itemView.cv_main_frag_item.setOnClickListener {

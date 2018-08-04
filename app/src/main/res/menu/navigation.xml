@@ -2,14 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
-
-    <item
         android:id="@+id/nav_categories"
         android:icon="@drawable/ic_categories"
-        android:title="@string/title_dashboard" />
+        android:title="@string/categories" />
+
+    <item
+        android:id="@+id/nav_setting"
+        android:icon="@drawable/ic_setting"
+        android:title="@string/setting" />
+    <item
+        android:id="@+id/nav_computer"
+        android:icon="@drawable/ic_setting"
+        android:title="@string/computer_wallper" />
 
     <!--<item-->
         <!--android:id="@+id/nav_hot_search"-->

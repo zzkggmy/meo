@@ -1,5 +1,7 @@
 package com.kai.meo.http
 
+import com.kai.meo.bean.ComputerWallpaperBean
+import com.kai.meo.bean.ComputerWallpaperCategoryBean
 import kotlinx.coroutines.experimental.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -24,5 +26,11 @@ interface ApiService {
     @GET("v2/vertical/vertical/{id}/comment")
     fun getComment(@Path("id") id: String): Deferred<com.kai.meo.bean.CommentBean>
 
+    //获取电脑壁纸分类
+    @GET("v1/wallpaper/category")
+    fun getComputerWallpaperCategory(): Deferred<ComputerWallpaperCategoryBean>
 
+    //获取类别下电脑壁纸
+    @GET("v1/wallpaper/category/{id}/wallpaper?")
+fun getComputerWallpaper(@Path("id") id: String): Deferred<ComputerWallpaperBean>
 }

@@ -10,6 +10,10 @@
     <color name="red">#f44336</color>
     <color name="grey_line">#eeeeee</color>
     <color name="white">#ffffff</color>
-    <color name="black">#ffffff</color>
+    <color name="text_black">#212121</color>
+    <color name="grey_400">#bdbdbd</color>
+    <color name="grey_300">#e0e0e0</color>
+    <color name="red_500">#f64433</color>
+    <color name="grey_800">#424242</color>
     <color name="zhihu_primary">#1E8AE8</color>
 </resources>

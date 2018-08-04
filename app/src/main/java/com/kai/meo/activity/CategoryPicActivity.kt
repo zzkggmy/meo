@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
+import com.kai.meo.bean.CategoryPicBean
 import com.kai.meo.utils.StatusBarUtil
 import com.kai.meowallpaper.R
 import kotlinx.android.synthetic.main.activity_category_pic.*
@@ -11,7 +12,7 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 
 class CategoryPicActivity : AppCompatActivity() {
-    private val list: ArrayList<com.kai.meo.bean.CategoryPicBean.Res.Vertical> = ArrayList()
+    private val list: ArrayList<CategoryPicBean.Res.Vertical> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_pic)

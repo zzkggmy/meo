@@ -23,12 +23,18 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.kai.meo.activity.CategoryActivity"
+            android:label="分类" />
+        <activity
             android:name="com.kai.meo.activity.CategoryPicActivity"
             android:label="分类下图片" />
         <activity
-            android:theme="@style/AppTheme"
             android:name="com.kai.meo.activity.PicDetailsActivity"
-            android:label="图片详情" />
+            android:label="图片详情"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.kai.meo.activity.ComputerWallpaperActivity"
+            android:label="电脑壁纸" />
     </application>
 
 </manifest>

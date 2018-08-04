@@ -1,63 +1,59 @@
 package com.kai.meo.activity
 
+import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.StaggeredGridLayoutManager
+import android.widget.Toast
+import com.kai.meo.adapter.RecommendAdapter
+import com.kai.meo.bean.RecommendBean
+import com.kai.meo.http.Api
+import com.kai.meo.utils.RecyclerItemDecoration
 import com.kai.meo.utils.StatusBarUtil
-import com.kai.meo.utils.setToken
+import com.kai.meo.view.LoadingProgress
 import com.kai.meowallpaper.R
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 
 class MainActivity : AppCompatActivity() {
-    private val list: ArrayList<Fragment> = ArrayList()
-    private val mainFragment = com.kai.meo.fragment.MainFragment()
-    private val categoriesFragment = com.kai.meo.fragment.CategoriesFragment()
+    private var loadingProgress: LoadingProgress? = null
+    private val list: ArrayList<RecommendBean.Res.Vertical> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         StatusBarUtil.setColorNoTranslucent(this, resources.getColor(R.color.zhihu_primary))
-        list.run {
-            add(mainFragment)
-            add(categoriesFragment)
+        val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        loadingProgress = LoadingProgress(this)
+        loadingProgress!!.showLoding()
+        getFeed()
+        rv_main.layoutManager = staggeredGridLayoutManager
+        rv_main.addItemDecoration(RecyclerItemDecoration(15,2))
+        iv_menu_main.setOnClickListener { dl_main.openDrawer(nv_menu) }
+        nv_menu.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_categories -> startActivity(Intent(this, CategoryActivity::class.java))
+//                R.id.nav_setting -> startActivity(Intent())
+                R.id.nav_computer -> startActivity(Intent(this, ComputerWallpaperActivity::class.java))
+            }
+            false
         }
-        supportFragmentManager.beginTransaction()
-                .add(R.id.fl_main, mainFragment).add(R.id.fl_main, categoriesFragment)
-                .show(mainFragment).hide(categoriesFragment).commit()
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
-    fun showFrag(position: Int) {
-        list.forEachIndexed { index, fragment ->
-            if (index == position) {
-                supportFragmentManager.beginTransaction().show(fragment).commitNow()
+    private fun getFeed() {
+        async(UI) {
+            val result = Api.retrofitService.getMain().await()
+            if (result.code == 0) {
+                loadingProgress!!.dismissLoding()
+                list.addAll(result.res.vertical)
+                rv_main.adapter = RecommendAdapter(list) { view, position ->
+                    startActivity(Intent(this@MainActivity, PicDetailsActivity::class.java).putExtra("id", list[position].id))
+                }
             } else {
-                supportFragmentManager.beginTransaction().hide(fragment).commitNow()
+                Toast.makeText(this@MainActivity, result.msg, Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.nav_home -> {
-                setToken("123")
-                showFrag(0)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.nav_categories -> {
-                showFrag(1)
-                return@OnNavigationItemSelectedListener true
-            }
-//            R.id.nav_hot_search -> {
-//
-//                return@OnNavigationItemSelectedListener true
-//            }
-//            R.id.nav_mine -> {
-//                Toast.makeText(this, getToken, Toast.LENGTH_SHORT).show()
-//                return@OnNavigationItemSelectedListener true
-//            }
-        }
-        false
     }
 
 }
