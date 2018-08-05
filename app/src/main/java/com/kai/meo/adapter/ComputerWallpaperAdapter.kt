@@ -24,6 +24,9 @@ class ComputerWallpaperAdapter(val list: ArrayList<ComputerWallpaperBean.Res.Wal
                 .load(list[position].preview)
                 .apply(options)
                 .into(holder.itemView.iv_computer_wallpaper)
+        holder.itemView.cv_computer_wallpaper.setOnClickListener {
+            onClick(holder.itemView,holder.adapterPosition)
+        }
     }
 
     class ComputerWallpaperHolder(view: View) : RecyclerView.ViewHolder(view)

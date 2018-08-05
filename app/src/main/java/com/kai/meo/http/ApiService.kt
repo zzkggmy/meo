@@ -1,5 +1,6 @@
 package com.kai.meo.http
 
+import com.kai.meo.bean.CategoryPicBean
 import com.kai.meo.bean.ComputerWallpaperBean
 import com.kai.meo.bean.ComputerWallpaperCategoryBean
 import kotlinx.coroutines.experimental.Deferred
@@ -20,7 +21,7 @@ interface ApiService {
 
     //获取分类下图片
     @GET("v1/vertical/category/{id}/vertical?")
-    fun getCategoryPic(@Path("id") id: String): Deferred<com.kai.meo.bean.CategoryPicBean>
+    fun getCategoryPic(@Path("id") id: String): Deferred<CategoryPicBean>
 
     //获取评论
     @GET("v2/vertical/vertical/{id}/comment")

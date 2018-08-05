@@ -35,19 +35,11 @@ class PicDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pic_details)
         StatusBarUtil.setTranslucent(this, 0)
+        iv_back_pic_details.setOnClickListener { finish() }
         emptyRecyclerView = EmptyRecyclerView(this)
-//        if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
-//            val window = window
-//            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
-//            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-//                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
-//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-//            window.statusBarColor = Color.TRANSPARENT
-//            window.navigationBarColor = Color.TRANSPARENT
-//        }nsv_comment
         StatusBarUtil.setTranslucentForCoordinatorLayout(this, 0)
         emptyRecyclerView = rv_comment_pic_details as EmptyRecyclerView
+        Log.d("cv",intent.getStringExtra("id"))
         imgUrl = "http://img5.adesk.com/" + intent.getStringExtra("id")
 
         tv_download_pic.setOnClickListener { SavePicManager.savePhoto(imgUrl) }
