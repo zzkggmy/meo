@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitHelper {
 
-    fun create(url: String): com.kai.meo.http.ApiService {
+    fun create(url: String): ApiService {
         val okHttpClient = OkHttpClient.Builder().apply {
             connectTimeout(15, TimeUnit.SECONDS)
             writeTimeout(15, TimeUnit.SECONDS)

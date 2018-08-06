@@ -1,7 +1,6 @@
 package com.kai.meo.adapter
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import com.kai.meo.bean.CommentBean
 import com.kai.meo.utils.Common
 import com.kai.meo.utils.options
 import com.kai.meowallpaper.R
-import kotlinx.android.synthetic.main.categories_item.view.*
 import kotlinx.android.synthetic.main.comment_item.view.*
 
 class CommentAdapter(val list: ArrayList<CommentBean.Res.Comment>, val onClick: (view: View, position: Int) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -23,8 +21,18 @@ class CommentAdapter(val list: ArrayList<CommentBean.Res.Comment>, val onClick: 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.tv_content_comment_item.text = list[position].content
-        holder.itemView.tv_reply_time_item.text = list[position].user.viptime.toString()
         holder.itemView.tv_user_name_item.text = list[position].user.name
+        list.forEachIndexed { index, comment ->
+            if (comment.user.isvip) {
+                Glide.with(Common.context)
+                        .load(R.drawable.ic_is_vip)
+                        .into(holder.itemView.iv_vip_comment)
+            } else {
+                Glide.with(Common.context)
+                        .load(R.drawable.ic_no_vip)
+                        .into(holder.itemView.iv_vip_comment)
+            }
+        }
         Glide.with(com.kai.meo.utils.Common.context)
                 .asBitmap()
                 .load(list[position].user.avatar)

@@ -5,3 +5,9 @@ fun setToken(token: String) {
 }
 
 val getToken = getString("token","")
+
+fun setThemeColor(color: String) {
+    spSetString("color", color)
+}
+
+val getThemeColor = getString("color","#1E8AE8")

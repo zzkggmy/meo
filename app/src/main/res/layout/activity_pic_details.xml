@@ -37,6 +37,12 @@
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
+    <LinearLayout
+        android:id="@+id/ll_pic_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" />
+
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nsv_comment"
         android:layout_width="match_parent"
@@ -118,8 +124,7 @@
                 android:background="@color/white"
                 android:id="@+id/rv_comment_pic_details"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

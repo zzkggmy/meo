@@ -1,92 +1,84 @@
 package com.kai.meo.activity
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.graphics.drawable.Drawable
-import android.os.Build
-import android.os.Bundle
 import android.support.annotation.NonNull
 import android.support.design.widget.BottomSheetBehavior
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
+import com.kai.meo.adapter.CommentAdapter
 import com.kai.meo.bean.CommentBean
-import com.kai.meo.utils.*
+import com.kai.meo.http.Api
+import com.kai.meo.utils.Common
+import com.kai.meo.utils.SavePicManager
+import com.kai.meo.utils.StatusBarUtil
+import com.kai.meo.utils.picDetailsOptions
+import com.kai.meo.view.BaseActivity
+import com.kai.meo.view.EmptyRecyclerView
 import com.kai.meowallpaper.R
 import kotlinx.android.synthetic.main.activity_pic_details.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
-import android.view.LayoutInflater
-import com.kai.meo.adapter.CommentAdapter
-import com.kai.meo.view.EmptyRecyclerView
 
 
-class PicDetailsActivity : AppCompatActivity() {
+class PicDetailsActivity : BaseActivity() {
+
     private var imgUrl = ""
-    private var emptyRecyclerView: EmptyRecyclerView? = null
+    private lateinit var emptyRecyclerView: EmptyRecyclerView
     private val list: ArrayList<CommentBean.Res.Comment> = ArrayList()
-    @SuppressLint("ObsoleteSdkInt")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pic_details)
+    override fun initView() {
         StatusBarUtil.setTranslucent(this, 0)
-        iv_back_pic_details.setOnClickListener { finish() }
         emptyRecyclerView = EmptyRecyclerView(this)
-        StatusBarUtil.setTranslucentForCoordinatorLayout(this, 0)
         emptyRecyclerView = rv_comment_pic_details as EmptyRecyclerView
-        Log.d("cv",intent.getStringExtra("id"))
         imgUrl = "http://img5.adesk.com/" + intent.getStringExtra("id")
+        iv_back_pic_details.setOnClickListener { finish() }
+        showLoading()
 
         tv_download_pic.setOnClickListener { SavePicManager.savePhoto(imgUrl) }
+        getComment()
         val behavior = BottomSheetBehavior.from(nsv_comment)
-        Log.d("cd", rv_comment_pic_details.height.toString())
         behavior.state = BottomSheetBehavior.PEEK_HEIGHT_AUTO
         behavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(@NonNull bottomSheet: View, newState: Int) {
-
             }
 
             override fun onSlide(@NonNull bottomSheet: View, slideOffset: Float) {
             }
         })
         tv_comment.setOnClickListener { behavior.setState(BottomSheetBehavior.STATE_EXPANDED) }
-
-
-        getComment()
         val simpleTarget = object : SimpleTarget<Drawable>() {
             override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
                 cl_pic_details.background = resource
+                if (resource.isVisible) {
+                    dismissLoading()
+                }
             }
         }
-        Glide.with(com.kai.meo.utils.Common.context)
+        Glide.with(Common.context)
                 .load(imgUrl)
                 .apply(picDetailsOptions)
                 .into(simpleTarget)
-        Log.d("sa", "" + ScreenUtil.getScreeWidth() + ScreenUtil.getScreeHeight())
-        emptyRecyclerView!!.layoutManager = LinearLayoutManager(this)
+
+        emptyRecyclerView.layoutManager = LinearLayoutManager(this)
+        if (list.size >= 1) {
+            tv_comment.setOnClickListener { behavior.setState(BottomSheetBehavior.STATE_EXPANDED) }
+            behavior.peekHeight = ll_pic_details.height
+
+        }
 
     }
 
     private fun getComment() {
         async(UI) {
-            val result = com.kai.meo.http.Api.retrofitService.getComment(intent.getStringExtra("id")).await()
+            val result = Api.retrofitService.getComment(intent.getStringExtra("id")).await()
             if (result.code == 0) {
-                Log.d("tag1", intent.getStringExtra("id") + result.res.toString())
+                Log.d("de",result.res.comment.toString())
                 list.addAll(result.res.comment)
-//                if (list.size >= 1) {
-//                    rv_comment_pic_details.visibility = View.VISIBLE
-//                    cv_empty_comment.visibility = View.GONE
-//                } else {
-//                    rv_comment_pic_details.visibility = View.GONE
-//                    cv_empty_comment.visibility = View.VISIBLE
-//                }
-                emptyRecyclerView!!.setEmptyView(cv_empty_comment)
-                emptyRecyclerView!!.adapter = CommentAdapter(list) { view, position ->
+                emptyRecyclerView.setEmptyView(cv_empty_comment)
+                emptyRecyclerView.adapter = CommentAdapter(list) { view, position ->
 
                 }
             }
@@ -98,5 +90,7 @@ class PicDetailsActivity : AppCompatActivity() {
         lp.alpha = alpha
         window.attributes = lp
     }
+
+    override fun bindLayout() = R.layout.activity_pic_details
 
 }

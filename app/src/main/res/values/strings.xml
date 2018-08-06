@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">meoWallPaper</string>
+    <string name="app_name">meo</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -11,6 +11,9 @@
     <string name="comment">评论</string>
     <string name="recommend">推荐</string>
     <string name="loading">正在加载，请稍后...</string>
-    <string name="setting">设置</string>
     <string name="computer_wallper">电脑壁纸</string>
+    <string name="skip">Skip</string>
+    <string name="know">知道了</string>
+    <string name="setting">设置</string>
+    <string name="theme">主题颜色</string>
 </resources>
