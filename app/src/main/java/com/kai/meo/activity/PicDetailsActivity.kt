@@ -16,7 +16,7 @@ import com.kai.meo.utils.Common
 import com.kai.meo.utils.SavePicManager
 import com.kai.meo.utils.StatusBarUtil
 import com.kai.meo.utils.picDetailsOptions
-import com.kai.meo.view.BaseActivity
+import com.kai.meo.base.BaseActivity
 import com.kai.meo.view.EmptyRecyclerView
 import com.kai.meowallpaper.R
 import kotlinx.android.synthetic.main.activity_pic_details.*
@@ -92,5 +92,7 @@ class PicDetailsActivity : BaseActivity() {
     }
 
     override fun bindLayout() = R.layout.activity_pic_details
+
+    override fun useTitleBar() = false
 
 }

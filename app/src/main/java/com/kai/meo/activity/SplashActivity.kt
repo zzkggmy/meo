@@ -9,11 +9,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
+import com.kai.meo.base.BaseActivity
 import com.kai.meo.http.ApiService
 import com.kai.meo.utils.StatusBarUtil
 import com.kai.meo.utils.getToken
 import com.kai.meo.utils.picDetailsOptions
-import com.kai.meo.view.BaseActivity
 import com.kai.meowallpaper.R
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.coroutines.experimental.android.UI
@@ -84,5 +84,7 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun bindLayout() = R.layout.activity_splash
+
+    override fun useTitleBar() = false
 
 }

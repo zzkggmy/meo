@@ -13,15 +13,18 @@
         tools:openDrawer="start">
 
         <android.support.design.widget.AppBarLayout
+            android:elevation="10dp"
+            android:id="@+id/abl_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true">
 
             <android.support.v7.widget.Toolbar
+                android:id="@+id/tl_main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/zhihu_primary"
                 android:fitsSystemWindows="true"
+                android:elevation="10dp"
                 app:layout_scrollFlags="enterAlwaysCollapsed|scroll">
 
                 <RelativeLayout

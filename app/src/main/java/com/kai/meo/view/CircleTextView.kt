@@ -10,14 +10,14 @@ import android.widget.TextView
 
 
 @SuppressLint("ViewConstructor")
-class CircleTextView(context: Context, var themeColor: String) : TextView(context) {
+class CircleTextView(context: Context, var themeColor: Int) : TextView(context) {
     private val mBgPaint = Paint()
     private var mContext: Context? = null
 
     init {
         mContext = context
         mBgPaint.isAntiAlias = true
-        mBgPaint.color = Color.parseColor(themeColor)
+        mBgPaint.color = themeColor
     }
 
     var pfd = PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)

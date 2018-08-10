@@ -1,13 +1,15 @@
 package com.kai.meo.utils
 
+import com.kai.meowallpaper.R
+
 fun setToken(token: String) {
     spSetString("token", token)
 }
 
 val getToken = getString("token","")
 
-fun setThemeColor(color: String) {
-    spSetString("color", color)
+fun setThemeColor(color: Int) {
+    spSetInt("color", color)
 }
 
-val getThemeColor = getString("color","#1E8AE8")
+val getThemeColor = getInt("color", R.color.zhihu_primary)

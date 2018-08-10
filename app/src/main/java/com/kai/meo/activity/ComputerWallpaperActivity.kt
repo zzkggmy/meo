@@ -3,9 +3,11 @@ package com.kai.meo.activity
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewCompat
 import com.kai.meo.adapter.ComputerWallpaperPagerAdapter
+import com.kai.meo.base.BaseActivity
 import com.kai.meo.bean.ComputerWallpaperCategoryBean
 import com.kai.meo.http.Api
-import com.kai.meo.view.BaseActivity
+import com.kai.meo.utils.findColor
+import com.kai.meo.utils.getThemeColor
 import com.kai.meowallpaper.R
 import kotlinx.android.synthetic.main.activity_computer_wallper.*
 import kotlinx.coroutines.experimental.android.UI
@@ -24,6 +26,12 @@ class ComputerWallpaperActivity : BaseActivity() {
         getComputerWallpaperCategory()
     }
 
+    override fun onResume() {
+        super.onResume()
+        tl_computer_wallpaper.setBackgroundColor(findColor(getThemeColor))
+        tb_computer_wallpaper.setBackgroundColor(findColor(getThemeColor))
+    }
+
     private fun getComputerWallpaperCategory() {
         async(UI) {
             val result = Api.retrofitService.getComputerWallpaperCategory().await()
@@ -38,5 +46,7 @@ class ComputerWallpaperActivity : BaseActivity() {
     }
 
     override fun bindLayout() = R.layout.activity_computer_wallper
+
+    override fun useTitleBar() = false
 
 }

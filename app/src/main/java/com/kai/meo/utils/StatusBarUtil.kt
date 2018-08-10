@@ -48,7 +48,8 @@ object StatusBarUtil {
 
     @SuppressLint("ObsoleteSdkInt")
     @JvmOverloads
-    fun setColor(activity: Activity, @ColorInt color: Int, statusBarAlpha: Int = DEFAULT_ALPHA) {
+    fun setColor(view: View, activity: Activity, @ColorInt color: Int, statusBarAlpha: Int = DEFAULT_ALPHA) {
+        view.setBackgroundColor(color)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             activity.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
@@ -75,8 +76,8 @@ object StatusBarUtil {
      * @param activity 需要设置的 activity
      * @param color    状态栏颜色值
      */
-    fun setColorNoTranslucent(activity: Activity, @ColorInt color: Int) {
-        setColor(activity, color, 0)
+    fun setColorNoTranslucent(view: View,activity: Activity, @ColorInt color: Int) {
+        setColor(view,activity, color, 0)
     }
 
     /**

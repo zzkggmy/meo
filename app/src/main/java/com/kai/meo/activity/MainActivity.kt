@@ -4,10 +4,13 @@ import android.content.Intent
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.widget.Toast
 import com.kai.meo.adapter.RecommendAdapter
+import com.kai.meo.base.BaseActivity
 import com.kai.meo.bean.RecommendBean
 import com.kai.meo.http.Api
 import com.kai.meo.utils.RecyclerItemDecoration
-import com.kai.meo.view.BaseActivity
+import com.kai.meo.utils.StatusBarUtil
+import com.kai.meo.utils.findColor
+import com.kai.meo.utils.getThemeColor
 import com.kai.meowallpaper.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.experimental.android.UI
@@ -24,7 +27,6 @@ class MainActivity : BaseActivity() {
         getFeed()
         rv_main.layoutManager = staggeredGridLayoutManager
         rv_main.addItemDecoration(RecyclerItemDecoration(15,2))
-        tv.setOnClickListener { showSnackBar("") }
         iv_menu_main.setOnClickListener { dl_main.openDrawer(nv_menu) }
         nv_menu.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -36,6 +38,10 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        StatusBarUtil.setColorNoTranslucent(tl_main,this, findColor(getThemeColor))
+    }
     private fun getFeed() {
         async(UI) {
             val result = Api.retrofitService.getMain().await()
@@ -52,5 +58,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun bindLayout() = R.layout.activity_main
+
+    override fun useTitleBar() = false
 
 }

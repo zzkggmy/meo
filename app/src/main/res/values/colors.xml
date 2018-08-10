@@ -18,6 +18,7 @@
     <color name="zhihu_primary">#1E8AE8</color>
     <color name="pink">#fff50057</color>
     <color name="purple">#ffaa00ff</color>
+    <color name="purple_600">#8e24aa</color>
     <color name="deep_purplr">#ff6200ea</color>
     <color name="indigo">#ff304ffe</color>
     <color name="cyan">#ff00e5ff</color>
@@ -27,4 +28,11 @@
     <color name="amber">#ffffab00</color>
     <color name="orange">#ffff6d00</color>
     <color name="netease">#ff0033</color>
+    <color name="milky_white">#fef8e6</color>
+    <color name="qqq">#706443</color>
+    <color name="red_a700">#d50000</color>
+    <color name="red_a900">#b71a1c</color>
+    <color name="red_600">#e53935</color>
+    <color name="purple_a200">#e040fb</color>
+    <color name="purple_a400">#d500f9</color>
 </resources>

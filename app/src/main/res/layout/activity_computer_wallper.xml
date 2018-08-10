@@ -11,9 +11,9 @@
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_computer_wallpaper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/zhihu_primary"
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="enterAlwaysCollapsed|scroll">
 
@@ -27,16 +27,16 @@
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
+            android:elevation="10dp"
             android:id="@+id/tl_computer_wallpaper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="fill"
             android:measureAllChildren="true"
-            app:tabBackground="@color/zhihu_primary"
             app:tabGravity="fill"
-            app:tabIndicatorColor="#f44336"
+            app:tabIndicatorColor="#fef8e6"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/red"
+            app:tabSelectedTextColor="@color/milky_white"
             app:tabTextColor="@color/white" />
     </android.support.design.widget.AppBarLayout>
 
