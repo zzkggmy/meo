@@ -1,6 +1,11 @@
 package com.kai.meo.activity
 
+import android.app.AlertDialog
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.provider.Settings
 import android.support.annotation.NonNull
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v7.widget.LinearLayoutManager
@@ -10,13 +15,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.kai.meo.adapter.CommentAdapter
+import com.kai.meo.base.BaseActivity
 import com.kai.meo.bean.CommentBean
 import com.kai.meo.http.Api
-import com.kai.meo.utils.Common
-import com.kai.meo.utils.SavePicManager
-import com.kai.meo.utils.StatusBarUtil
-import com.kai.meo.utils.picDetailsOptions
-import com.kai.meo.base.BaseActivity
+import com.kai.meo.utils.*
 import com.kai.meo.view.EmptyRecyclerView
 import com.kai.meowallpaper.R
 import kotlinx.android.synthetic.main.activity_pic_details.*
@@ -37,7 +39,12 @@ class PicDetailsActivity : BaseActivity() {
         iv_back_pic_details.setOnClickListener { finish() }
         showLoading()
 
-        tv_download_pic.setOnClickListener { SavePicManager.savePhoto(imgUrl) }
+        iv_download_pic.setOnClickListener {
+            PermissionUtils.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE), 0)
+            if (PermissionUtils.checkAuthorized(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                SavePicManager.savePhoto(imgUrl)
+            }
+        }
         getComment()
         val behavior = BottomSheetBehavior.from(nsv_comment)
         behavior.state = BottomSheetBehavior.PEEK_HEIGHT_AUTO
@@ -91,8 +98,38 @@ class PicDetailsActivity : BaseActivity() {
         window.attributes = lp
     }
 
+    private fun openAppDetails() {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("保存图片需要存储权限”，请到 “应用信息 -> 权限” 中授予！")
+        builder.setPositiveButton("去手动授权") { dialog, which ->
+            val intent = Intent().apply {
+                action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                addCategory(Intent.CATEGORY_DEFAULT)
+                data = Uri.parse("package:$packageName")
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+            }
+            startActivity(intent)
+        }
+        builder.setNegativeButton("取消", null)
+        builder.show()
+    }
+
     override fun bindLayout() = R.layout.activity_pic_details
 
     override fun useTitleBar() = false
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 0) {
+            for (grant in grantResults) {
+                if (grant != PackageManager.PERMISSION_GRANTED) {
+                    openAppDetails()
+                } else {
+
+                }
+            }
+        }
+    }
 }

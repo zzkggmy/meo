@@ -30,7 +30,7 @@ object PermissionUtils {
         ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)
     }
 
-    private fun checkAuthorized(context: Context, permission: String): Boolean {
+    fun checkAuthorized(context: Context, permission: String): Boolean {
         return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
     }
 

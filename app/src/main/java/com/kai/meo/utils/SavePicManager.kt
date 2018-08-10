@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Environment
+import android.widget.Toast
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.ResponseBody
@@ -54,8 +55,7 @@ private fun saveBitmap(bitmap: Bitmap) {
         fos.flush()
         fos.close()
         val uri: Uri = Uri.fromFile(file)
-        com.kai.meo.utils.Common.context.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,uri))
-
+        Common.context.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri))
     }catch (e: FileNotFoundException){}
 
     try {
