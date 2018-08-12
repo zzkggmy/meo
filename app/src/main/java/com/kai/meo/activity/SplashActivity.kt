@@ -6,14 +6,15 @@ import android.os.Handler
 import android.text.TextUtils
 import android.util.Log
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import com.kai.meo.base.BaseActivity
 import com.kai.meo.http.ApiService
-import com.kai.meo.utils.StatusBarUtil
-import com.kai.meo.utils.getToken
-import com.kai.meo.utils.picDetailsOptions
+import com.kai.meo.utils.*
 import com.kai.meowallpaper.R
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.coroutines.experimental.android.UI
@@ -31,19 +32,20 @@ class SplashActivity : BaseActivity() {
 
     override fun initView() {
         StatusBarUtil.setTranslucent(this,0)
-        tv_skip_splash.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
-        val simpleTarget = object : SimpleTarget<Drawable>() {
-            override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
-                ll_splash.background = resource
-            }
-        }
-        Glide.with(com.kai.meo.utils.Common.context)
+//        val simpleTarget = object : SimpleTarget<Drawable>() {
+//            override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+//                ll_splash.background = resource
+//            }
+//        }
+        Glide.with(Common.context)
                 .load("https://cn.bing.com/az/hprichbg/rb/PortAntonio_ZH-CN10325538004_1920x1080.jpg")
-                .apply(picDetailsOptions)
-                .into(simpleTarget)
+                .apply(RequestOptions()
+                        .centerCrop()
+                        .priority(Priority.HIGH)
+                        .override(ScreenUtil.getScreeWidth(), ScreenUtil.getScreeHeight())
+                        .centerCrop()
+                        .diskCacheStrategy(DiskCacheStrategy.NONE))
+                .into(iv_splash)
         Handler().postDelayed({
 
             startActivity(Intent(this, MainActivity::class.java))
