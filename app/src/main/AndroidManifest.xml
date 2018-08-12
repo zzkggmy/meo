@@ -43,6 +43,7 @@
         <activity
             android:name="com.kai.meo.activity.ThemeActivity"
             android:label="设置" />
+        <activity android:name="com.kai.meo.activity.BannerActivity" />
 
         <receiver android:name="com.kai.meo.receiver.NetworkConnectChangedReceiver">
             <intent-filter>
